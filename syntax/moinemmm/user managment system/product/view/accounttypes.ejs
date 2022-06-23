@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>user managment system</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<div style="background-color: white;" class="row">
+  <% for (var i = 0; i < data.length; i++) {%>
+  
+      <div class="card" style="width: 18rem;">
+       <div class="card-body">
+          <h4><b><h3>username: </h3><%=   data[i].username %></b></h4> 
+          <div style="margin: 10px;"><h3>phone: </h3><%=data[i].phone %></div>
+    <div class="w3-padding w3-xlarge w3-teal">
+    <div style="margin-left: 95px;">
+</div>  
+  </div>
+  </div>
+</div>
+
+    <%}%> 
+</div>
+<center>
+  <% var pages; %>
+  <% var current; %>
+  <% if (pages > 0) { %>
+    <ul class="pagination text-center">
+      <% if (current == 1) { %>
+      <li class="disabled"><a>First</a></li>
+      <li class="disabled"><a>Prev</a></li>
+      <% } else { %>
+      <li><a href="/project/1">First</a></li>
+      <li><a class="prev" href="/project/<%= Number(current) - 1 %>">Prev</a></li>
+      <% } %> <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %> <%
+      if (i !== 1) { %>
+      <li class="disabled"><a>...</a></li>
+      <% } %> <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %> <%
+      if (i == current) { %>
+      <li class="active"><a><%= i %></a></li>
+      <% } else { %>
+      <li><a href="/project/<%= i %>"><%= i %></a></li>
+      <% } %> <% if (i == Number(current) + 4 && i < pages) { %>
+      <li class="disabled"><a>...</a></li>
+      <% } %> <% } %> <% if (current == pages) { %>
+      <li class="disabled"><a>Next</a></li>
+      <li class="disabled"><a>Last</a></li>
+      <% } else { %>
+      <li><a class="next" href="/project/<%= Number(current) + 1 %>">Next</a></li>
+      <li><a href="/project/<%= pages %>">Last</a></li>
+      <% } %>
+    </ul>
+    <% } %>
+</center>
+<div>
+</div><br><br>
+
+<div>
+  <a class=" bg-primary plus" onclick="openForm()" ><center><i class="fa fa-plus" style=" font-size:20px;color:black; margin: 10px; margin-top: 25px;"></i></center></a>
+</div>
+
+<div class="form-popup" id="myForm">
+<form action="/addaccounttype" method="post" class="form-container">
+  <h1>add user</h1>
+  <label for="type"><b>user name</b></label>
+  <input type="text" placeholder="Enter user" name="type" required>
+
+  <label for="tit"><b>phone</b></label>
+  <input type="text" placeholder="Enter phone" name="title" required>
+  <button type="submit" class="btn">Add</button>
+  <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+</form>
+</div>
+
+<script>
+function openForm() {
+document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+document.getElementById("myForm").style.display = "none";
+}
+</script>
+  </form>
+
+
+</body>
+</html>
